@@ -1,37 +1,49 @@
 ## Synopsis
 
-Run complexity-report against javascript source code from grunt build.
+Generate a generic violation report from whatever tool you like and optionally generate a standard XML report.
 
 ## Code Example
 
-    grunt.loadNpmTasks('grunt-complexity-report');
-     
-    grunt.initConfig({
+    var MultiReporter = require('violation-reporter')(grunt);
+    var XMLReporter = require('violation-reporter/tasks/XML')(grunt);
+    var checkstyleReporter = require('violation-reporter/tasks/checkstyleXML')(grunt, XMLReporter);
+
+    // create a new reporter and add checkstyle formatting
+    var reporter = new MultiReporter(files, options);
+    reporter.addReporter(checkstyleReporter);
     
-      complexity : {
-        js: {
-          files : [{ cwd: '.', src: ['/**/*.js'], expand : true}],
-          exclude: [],
-          options: {
-            pmdXML: '/pmd.xml',
-            teamcity: true  //send buildStatisticValue to TeamCity
-          }
-        }
-      };
-      
+    // create a new violation, from whatever data you like
+    violations.push({
+      filepath: file,
+      line: 0,
+      column: 0,
+      name: key,
+      rule: key,
+      severity: severity,
+      message: 'Too many',
+      ratio: ratio,
+      value: metrics[key] + ' ('+ options.analyzecss[key] + ')'
     });
+
+    // register the violation with the reporter
+    reporter.violations(file, violations); 
+       
+
+Real-world examples can be found in ([grunt-css-analysis](https://github.com/campbes/grunt-css-analysis)) and ([grunt-complexity-report](https://github.com/campbes/grunt-complexity-report))  
+    
 
 ## Motivation
 
-This project is based on the excellent [grunt-complexity](https://github.com/vigetlabs/grunt-complexity) from vigetlabs. Unfortunately there are some bugs/missing features that stopped me from using it and the project seems to have been abandoned.
+Jenkins has plugins to report on violations from a number of standard tools. There are many tools that are used to generate errors and issues, in a huge range of formats. 
+Violation-reporter is designed as a way to take this data and transform it into one of the available standards.
+Generally intended to be run from grunt or another build tool.
 
-This uses the same concepts, but adds the ability to break on different levels of severity, making it more useful as a reporting tool. It also treats maintainability as a similar error to complexity, enabling it to fit within a single report style.
+It currently only outputs to console, checkstyle and PMD format, but would be easy to extend to other XML formats.
 
-It currently only outputs to console and PMD format, but would be easy to extend to other XML formats.
 
 ## Installation
 
-npm install grunt-complexity-report
+npm install violation-reporter
 
 ## Contributors
 
