@@ -1,0 +1,37 @@
+{
+  "name": "violation-reporter",
+  "version": "0.0.0-beta.1",
+  "description": "Genrate violation reports in various formats",
+  "author": {
+    "name": "Stuart Campbell",
+    "url": "https://github.com/campbes"
+  },
+  "main": "tasks/multi.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/campbes/violation-reporter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/campbes/violation-reporter/issues"
+  },
+  "licences": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "fs-extra": "^0.23.0"
+  },
+  "devDependencies": {
+    "grunt": ">=0.4.x",
+    "grunt-contrib-jshint": "^0.11.2"
+  },
+  "readme": "## Synopsis\n\nRun complexity-report against javascript source code from grunt build.\n\n## Code Example\n\n    grunt.loadNpmTasks('grunt-complexity-report');\n     \n    grunt.initConfig({\n    \n      complexity : {\n        js: {\n          files : [{ cwd: '.', src: ['/**/*.js'], expand : true}],\n          exclude: [],\n          options: {\n            pmdXML: '/pmd.xml',\n            teamcity: true  //send buildStatisticValue to TeamCity\n          }\n        }\n      };\n      \n    });\n\n## Motivation\n\nThis project is based on the excellent [grunt-complexity](https://github.com/vigetlabs/grunt-complexity) from vigetlabs. Unfortunately there are some bugs/missing features that stopped me from using it and the project seems to have been abandoned.\n\nThis uses the same concepts, but adds the ability to break on different levels of severity, making it more useful as a reporting tool. It also treats maintainability as a similar error to complexity, enabling it to fit within a single report style.\n\nIt currently only outputs to console and PMD format, but would be easy to extend to other XML formats.\n\n## Installation\n\nnpm install grunt-complexity-report\n\n## Contributors\n\nStuart Campbell ([campbes](https://github.com/campbes))\n\n## License\n\nReleased under the [MIT License](http://opensource.org/licenses/MIT)\n",
+  "homepage": "https://github.com/campbes/violation-reporter#readme",
+  "_id": "violation-reporter@0.0.0-alpha.1",
+  "scripts": {},
+  "_shasum": "8b05104711cf7cd0418af3530363ce063fab47fa",
+  "_from": "violation-reporter@*"
+}

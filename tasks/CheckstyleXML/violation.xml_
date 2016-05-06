@@ -1,0 +1,4 @@
+<file name="<%= filepath %>"><% violations.forEach(function(data){ %>
+    <error line="<%=data.line %>" column="<%=data.column %>" message="<%= data.message %>: <%= data.value %>" severity="<%= data.severity %>" source="<%= data.rule %>"/>
+<% }) %></file>
+
