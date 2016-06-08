@@ -5,6 +5,7 @@ module.exports = function() {
 		this.filenames = filenames;
 		this.options = options;
 		this.reporters = [];
+		this.options.name = this.options.name || 'Violation report';
 	};
 
 	MultiReporter.prototype = {
